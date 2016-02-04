@@ -1,5 +1,3 @@
-require 'pry'
-
 class Currency
   attr_accessor:amount
   attr_accessor:type
@@ -19,11 +17,19 @@ class Currency
   end
 
   def +(value)
-    Currency.new(@amount += value.amount, @type)
+    if value.class == Fixnum || value.class == Float
+      Currency.new(@amount + value, @type)
+    elsif value.type == @type
+      Currency.new(@amount + value.amount, @type)
+    else
+      raise DifferentCurrencyCodeError
+    end
+  rescue => e
+    puts e.inspect
   end
 
   def -(value)
-    Currency.new(@amount -= value.amount, @type)
+    Currency.new(@amount - value.amount, @type)
   end
 
   def ==(value)
@@ -47,6 +53,16 @@ class Currency
   end
 
   def to_s
-    @amount.to_s + " " + @type.to_s
+    "#{@amount} #{@type}"
+  end
+
+  def inspect
+    self.to_s
+  end
+end
+
+class DifferentCurrencyCodeError < StandardError
+  def initialize(msg = "Two different types of currencies can not be added together.")
+    super
   end
 end
