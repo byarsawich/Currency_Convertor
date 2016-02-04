@@ -22,14 +22,22 @@ class Currency
     elsif value.type == @type
       Currency.new(@amount + value.amount, @type)
     else
-      raise DifferentCurrencyCodeError
+      raise DifferentCurrencyCodeError.new("added")
     end
   rescue => e
     puts e.inspect
   end
 
   def -(value)
-    Currency.new(@amount - value.amount, @type)
+    if value.class == Fixnum || value.class == Float
+      Currency.new(@amount - value, @type)
+    elsif value.type == @type
+      Currency.new(@amount - value.amount, @type)
+    else
+      raise DifferentCurrencyCodeError.new("subtracted")
+    end
+  rescue => e
+    puts e.inspect
   end
 
   def ==(value)
@@ -45,10 +53,27 @@ class Currency
   end
 
   def *(value)
-    Currency.new(@amount * value, @type)
+    if value.class == Fixnum || value.class == Float
+      Currency.new(@amount * value, @type)
+    elsif value.type == @type
+      Currency.new(@amount * value.amount, @type)
+    else
+      raise DifferentCurrencyCodeError.new("multiplied")
+    end
+  rescue => e
+    puts e.inspect
   end
 
   def /(value)
+    if value.class == Fixnum || value.class == Float
+      Currency.new(@amount / value, @type)
+    elsif value.type == @type
+      Currency.new(@amount / value.amount, @type)
+    else
+      raise DifferentCurrencyCodeError.new("subtracted")
+    end
+  rescue => e
+    puts e.inspect
     Currency.new(@amount / value, @type)
   end
 
@@ -62,7 +87,7 @@ class Currency
 end
 
 class DifferentCurrencyCodeError < StandardError
-  def initialize(msg = "Two different types of currencies can not be added together.")
-    super
+  def initialize(operation = "used that way", msg = "Two different types of currencies can not be ")
+    super(msg + operation)
   end
 end
