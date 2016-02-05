@@ -1,8 +1,8 @@
 class Currency
-  attr_accessor:amount
-  attr_accessor:type
+  attr_accessor :amount, :type
 
-  CURRENCIES = {"$" => :USD, "¥" => :JPY, "£" => :GBP, "€" => :EUR, "R" => :ZAR, "₩" => :KRW, "kr" => :NOK, "руб" => :RUB}
+  CURRENCIES = {"$" => :USD, "¥" => :JPY, "£" => :GBP, "€" => :EUR, "R" => :ZAR, "₩" => :KRW, "kr" => :NOK,
+                "руб" => :RUB, "AUD" => :AUD, "CAD" => :CAD, "NZD" => :NZD}
 
   def initialize(amount = 0.0, type = :USD)
     if amount.class == String
@@ -81,6 +81,29 @@ class Currency
   rescue => e
     print e.inspect + "\n"
     print e.backtrace
+  end
+
+  def >(value)
+    @amount > value.amount
+  end
+
+  def <(value)
+    @amount < value.amount
+  end
+
+  def >=(value)
+    @amount = value.amount
+  end
+
+  def <=(value)
+    @amount <= value.amount
+  end
+
+  def <=>(value)
+    return -1 if @amount < value.amount
+    return 0 if @amount == value.amount
+    return 1 if @amount > value.amount
+    return nil
   end
 
   def to_s
