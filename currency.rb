@@ -2,25 +2,28 @@ class Currency
   attr_accessor:amount
   attr_accessor:type
 
-  @@currency_types = {"$" => :USD, "¥" => :JPY, "£" => :GBP, "€" => :EUR}
+  CURRENCIES = {"$" => :USD, "¥" => :JPY, "£" => :GBP, "€" => :EUR}
 
   def initialize(amount = 0.0, type = :USD)
-    @amount = amount.to_f
-    @type = type.to_sym
-  end
-
-  class << self
-  private
-    def check_currency_symbol(value)
-      @@currency_types[value]
+    if amount.class == String
+      symbol = amount.gsub(/\d+[,.]\d+/, '').strip
+      @amount = amount.scan(/\d+[,.]\d+/).join('').strip.to_f
+      if CURRENCIES[symbol]
+        @type = CURRENCIES[symbol].to_sym
+      else
+        @type = type.to_sym
+      end
+    else
+      @amount = amount.to_f
+      @type = type.upcase.to_sym
     end
   end
 
   def +(value)
     if value.class == Fixnum || value.class == Float
-      Currency.new(@amount + value, @type)
+      return Currency.new(@amount + value, @type)
     elsif value.type == @type
-      Currency.new(@amount + value.amount, @type)
+      return Currency.new(@amount + value.amount, @type)
     else
       raise DifferentCurrencyCodeError.new("added")
     end
@@ -30,9 +33,9 @@ class Currency
 
   def -(value)
     if value.class == Fixnum || value.class == Float
-      Currency.new(@amount - value, @type)
+      return Currency.new(@amount - value, @type)
     elsif value.type == @type
-      Currency.new(@amount - value.amount, @type)
+      return Currency.new(@amount - value.amount, @type)
     else
       raise DifferentCurrencyCodeError.new("subtracted")
     end
@@ -54,9 +57,9 @@ class Currency
 
   def *(value)
     if value.class == Fixnum || value.class == Float
-      Currency.new(@amount * value, @type)
+      return Currency.new(@amount * value, @type)
     elsif value.type == @type
-      Currency.new(@amount * value.amount, @type)
+      return Currency.new(@amount * value.amount, @type)
     else
       raise DifferentCurrencyCodeError.new("multiplied")
     end
@@ -66,15 +69,14 @@ class Currency
 
   def /(value)
     if value.class == Fixnum || value.class == Float
-      Currency.new(@amount / value, @type)
+      return Currency.new(@amount / value, @type)
     elsif value.type == @type
-      Currency.new(@amount / value.amount, @type)
+      return Currency.new(@amount / value.amount, @type)
     else
-      raise DifferentCurrencyCodeError.new("subtracted")
+      raise DifferentCurrencyCodeError.new("divided")
     end
   rescue => e
     puts e.inspect
-    Currency.new(@amount / value, @type)
   end
 
   def to_s
