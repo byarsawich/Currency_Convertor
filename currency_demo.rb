@@ -1,12 +1,18 @@
 require 'pry'
-require './currency'
+require './currency_converter'
 
 c = Currency.new(3.45)
-d = Currency.new(1.05)
-e = Currency.new(2.25, "YEN")
+d = Currency.new(10.00)
+e = Currency.new(10.00, "GBP")
 
-puts Currency::CURRENCIES
+temp = Currency_Converter.new
+
+f = temp.convert(e, :EUR)
+
+puts f.to_s
 
 puts c.amount.to_s
 puts (c + d).to_s
-binding.pry
+# binding.pry
+# puts "test"
+# puts (e + c).to_s
