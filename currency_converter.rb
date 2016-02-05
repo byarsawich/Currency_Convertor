@@ -10,7 +10,8 @@ class Currency_Converter
     amount = cur.amount * conversion_rate
     return Currency.new(amount, cur.type)
   rescue => e
-    p e.inspect
+    print e.inspect + "\n"
+    print e.backtrace
   end
 end
 

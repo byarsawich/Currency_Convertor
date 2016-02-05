@@ -7,7 +7,7 @@ e = Currency.new(10.00, "GBP")
 
 temp = Currency_Converter.new
 
-f = temp.convert(e, :EUR)
+f = temp.convert(e, :YEN)
 
 puts f.to_s
 

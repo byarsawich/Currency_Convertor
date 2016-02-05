@@ -28,7 +28,8 @@ class Currency
       raise DifferentCurrencyCodeError.new("added")
     end
   rescue => e
-    puts e.inspect
+    print e.inspect + "\n"
+    print e.backtrace
   end
 
   def -(value)
@@ -40,7 +41,8 @@ class Currency
       raise DifferentCurrencyCodeError.new("subtracted")
     end
   rescue => e
-    puts e.inspect
+    print e.inspect + "\n"
+    print e.backtrace
   end
 
   def ==(value)
@@ -64,7 +66,8 @@ class Currency
       raise DifferentCurrencyCodeError.new("multiplied")
     end
   rescue => e
-    puts e.inspect
+    print e.inspect + "\n"
+    print e.backtrace
   end
 
   def /(value)
@@ -76,7 +79,8 @@ class Currency
       raise DifferentCurrencyCodeError.new("divided")
     end
   rescue => e
-    puts e.inspect
+    print e.inspect + "\n"
+    print e.backtrace
   end
 
   def to_s
