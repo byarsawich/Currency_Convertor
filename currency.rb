@@ -1,5 +1,3 @@
-require 'bigdecimal'
-
 class Currency
   attr_accessor:amount
   attr_accessor:type
@@ -13,7 +11,7 @@ class Currency
       if CURRENCIES[symbol]
         @type = CURRENCIES[symbol].to_sym
       else
-        @type = type.to_sym
+        @type = type.upcase.to_sym
       end
     else
       @amount = amount.to_f

@@ -10,7 +10,7 @@ f = Currency.new("€25.43")
 
 puts "#{a}\n#{b}\n#{c}\n#{d}\n#{e}\n#{f}"
 
-temp = Currency_Converter.new
+temp = CurrencyConverter.new
 
 g = temp.convert(c, :EUR)
 
