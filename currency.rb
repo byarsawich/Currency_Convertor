@@ -1,3 +1,5 @@
+require 'bigdecimal'
+
 class Currency
   attr_accessor:amount
   attr_accessor:type
@@ -34,7 +36,7 @@ class Currency
 
   def -(value)
     if value.class == Fixnum || value.class == Float
-      return Currency.new(@amount - value, @type)
+      rreturn Currency.new(@amount - value, @type)
     elsif value.type == @type
       return Currency.new(@amount - value.amount, @type)
     else
@@ -84,7 +86,7 @@ class Currency
   end
 
   def to_s
-    "#{@amount} #{@type}"
+    "#{sprintf('%.2f', @amount)} #{@type}"
   end
 
   def inspect

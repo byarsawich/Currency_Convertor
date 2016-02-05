@@ -13,7 +13,7 @@ class Currency_Converter
     raise UnknownCurrencyCodeError if !@rates[type] || !@rates[cur.type]
     conversion_rate = @rates[type] / @rates[cur.type]
     amount = cur.amount * conversion_rate
-    return Currency.new(amount, cur.type)
+    return Currency.new(amount, type)
   rescue => e
     print e.inspect + "\n"
     print e.backtrace

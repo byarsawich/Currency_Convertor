@@ -1,18 +1,23 @@
 require 'pry'
 require './currency_converter'
 
-c = Currency.new(3.45)
-d = Currency.new(10.00)
-e = Currency.new(10.00, "GBP")
+a = Currency.new()
+b = Currency.new(3.45)
+c = Currency.new("10.00")
+d = Currency.new(10.00, "GBP")
+e = Currency.new("$5.65")
+f = Currency.new("€25.43")
+
+puts "#{a}\n#{b}\n#{c}\n#{d}\n#{e}\n#{f}"
 
 temp = Currency_Converter.new
 
-f = temp.convert(e, :YEN)
+g = temp.convert(c, :EUR)
 
-puts f.to_s
-
-puts c.amount.to_s
-puts (c + d).to_s
-# binding.pry
-# puts "test"
-# puts (e + c).to_s
+puts g.to_s
+puts (g + f).to_s
+puts (c - b).to_s
+puts (c * 5).to_s
+puts (d / 2).to_s
+puts (c / b).to_s
+puts (f / g).to_s
