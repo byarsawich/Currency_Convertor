@@ -2,7 +2,7 @@ class Currency
   attr_accessor:amount
   attr_accessor:type
 
-  CURRENCIES = {"$" => :USD, "¥" => :JPY, "£" => :GBP, "€" => :EUR}
+  CURRENCIES = {"$" => :USD, "¥" => :JPY, "£" => :GBP, "€" => :EUR, "R" => :ZAR, "₩" => :KRW, "kr" => :NOK, "руб" => :RUB}
 
   def initialize(amount = 0.0, type = :USD)
     if amount.class == String
