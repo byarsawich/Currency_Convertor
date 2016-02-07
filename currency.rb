@@ -34,7 +34,7 @@ class Currency
 
   def -(value)
     if value.class == Fixnum || value.class == Float
-      rreturn Currency.new(@amount - value, @type)
+      return Currency.new(@amount - value, @type)
     elsif value.type == @type
       return Currency.new(@amount - value.amount, @type)
     else
