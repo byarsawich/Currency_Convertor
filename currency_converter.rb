@@ -2,10 +2,10 @@ require "./currency"
 
 class CurrencyConverter
   attr_accessor :rates
-  DEFAULTRATES = {USD: 1.0, GBP: 0.69044, EUR: 0.89723, INR: 67.7981, AUD: 1.41307, CAD: 1.38804,
+  DEFAULT_RATES = {USD: 1.0, GBP: 0.69044, EUR: 0.89723, INR: 67.7981, AUD: 1.41307, CAD: 1.38804,
           ZAR: 15.9772, NZD: 1.50979, JPY: 116.909, KRW: 1204.53, RUB: 77.2611, NOK: 8.59570}
 
-  def initialize(rates = DEFAULTRATES)
+  def initialize(rates = DEFAULT_RATES)
     @rates = rates
   end
 

@@ -5,7 +5,7 @@ a = Currency.new()
 b = Currency.new(3.45)
 c = Currency.new("10.00")
 d = Currency.new(10.00, "GBP")
-e = Currency.new("$5.65")
+e = Currency.new("$5.00")
 f = Currency.new("€25.43")
 
 puts "#{a}\n#{b}\n#{c}\n#{d}\n#{e}\n#{f}"
